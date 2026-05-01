@@ -45,9 +45,7 @@
             <view class="product-bottom">
               <text class="product-price">{{item.price}}元</text>
               <view class="product-actions">
-                <text wx:if="{{item.stock > 0}}" class="product-stock">库存 {{item.stock}}</text>
-                <text wx:else class="product-out">已售罄</text>
-                <view wx:if="{{item.stock > 0}}" class="btn-add" data-id="{{item.id}}" catchtap="onAddToCart">
+                <view class="btn-add" data-id="{{item.id}}" catchtap="onAddToCart">
                   <text class="btn-add-text">+</text>
                 </view>
               </view>
@@ -114,21 +112,24 @@
 </view>
 
 <!-- 评价面板 -->
-<view wx:if="{{showRating}}" class="rating-mask" bindtap="onCloseRating"></view>
+<view wx:if="{{showRating}}" class="rating-mask" catchtap="onCloseRating"></view>
 <view wx:if="{{showRating}}" class="rating-panel">
   <view class="rating-panel-header">
     <text class="rating-panel-title">评价商品</text>
-    <text class="rating-panel-close" bindtap="onCloseRating">×</text>
+    <text class="rating-panel-close" catchtap="onCloseRating">×</text>
   </view>
   <view class="rating-product-name">{{ratingProductName}}</view>
   <view class="rating-stars">
-    <block wx:for="{{5}}" wx:key="*this">
-      <text class="rating-star-btn {{ratingValue >= item ? 'star-on' : ''}}" data-value="{{item}}" catchtap="onSelectStar">★</text>
-    </block>
+    <text class="rating-star-btn {{ratingValue >= 1 ? 'star-on' : ''}}" data-value="1" catchtap="onSelectStar">★</text>
+    <text class="rating-star-btn {{ratingValue >= 2 ? 'star-on' : ''}}" data-value="2" catchtap="onSelectStar">★</text>
+    <text class="rating-star-btn {{ratingValue >= 3 ? 'star-on' : ''}}" data-value="3" catchtap="onSelectStar">★</text>
+    <text class="rating-star-btn {{ratingValue >= 4 ? 'star-on' : ''}}" data-value="4" catchtap="onSelectStar">★</text>
+    <text class="rating-star-btn {{ratingValue >= 5 ? 'star-on' : ''}}" data-value="5" catchtap="onSelectStar">★</text>
   </view>
   <view class="rating-hint">{{ratingValue}} 星</view>
+  <textarea class="rating-content-input" placeholder="说点什么吧（选填）" value="{{ratingContent}}" bindinput="onContentInput" maxlength="200"></textarea>
   <view class="rating-panel-footer">
-    <view class="btn-submit-rating" bindtap="onSubmitRating">
+    <view class="btn-submit-rating" catchtap="onSubmitRating">
       <text>提交评价</text>
     </view>
   </view>

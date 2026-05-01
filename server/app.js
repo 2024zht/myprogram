@@ -352,6 +352,23 @@ app.post('/api/reviews', (req, res) => {
     Math.round(stats.avg_rating * 10) / 10, stats.cnt, product_id
   )
 
+  // 通知老板有新评价
+  const reviewProduct = db.prepare('SELECT name FROM products WHERE id = ?').get(product_id)
+  const bossOpenid = getBossOpenid()
+  if (bossOpenid && reviewProduct) {
+    const stars = '★'.repeat(r) + '☆'.repeat(5 - r)
+    const reviewText = content ? `${stars} ${content}` : stars
+    const now = new Date()
+    const timeStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`
+    sendSubscribeMessage(bossOpenid, {
+      time5: { value: timeStr },
+      character_string6: { value: String(r) + '星' },
+      thing4: { value: '商品评价' },
+      thing10: { value: reviewProduct.name },
+      time19: { value: timeStr }
+    }).catch(err => console.error('评价通知失败:', err.message))
+  }
+
   res.json({ success: true, data: { rating: Math.round(stats.avg_rating * 10) / 10, review_count: stats.cnt } })
 })
 

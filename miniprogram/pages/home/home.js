@@ -17,6 +17,7 @@ Page({
     ratingProductId: null,
     ratingProductName: '',
     ratingValue: 5,
+    ratingContent: '',
     remark: '',
     cartTotal: 0
   },
@@ -46,7 +47,7 @@ Page({
   },
 
   applyRole(role) {
-    // TODO: 测试完后恢复原逻辑，去掉下面这行
+    // TODO: 测试完后恢复原逻辑
     role = 'user'
     this.setData({ role })
     if (role === 'user') {
@@ -89,25 +90,19 @@ Page({
   onAddToCart(e) {
     const id = e.currentTarget.dataset.id
     const product = this.data.products.find(p => p.id === id)
-    if (!product || product.stock <= 0) return
+    if (!product) return
 
     const cart = [...this.data.cart]
     const exist = cart.find(c => c.product_id === id)
     if (exist) {
-      if (exist.quantity < product.stock) {
-        exist.quantity++
-      } else {
-        wx.showToast({ title: '库存不足', icon: 'none' })
-        return
-      }
+      exist.quantity++
     } else {
       cart.push({
         product_id: product.id,
         name: product.name,
         price: product.price,
         image: product.image,
-        quantity: 1,
-        stock: product.stock
+        quantity: 1
       })
     }
     const cartCount = cart.reduce((s, c) => s + c.quantity, 0)
@@ -146,12 +141,7 @@ Page({
     const cart = [...this.data.cart]
     const item = cart.find(c => c.product_id === id)
     if (!item) return
-    if (item.quantity < item.stock) {
-      item.quantity++
-    } else {
-      wx.showToast({ title: '库存不足', icon: 'none' })
-      return
-    }
+    item.quantity++
     const cartCount = cart.reduce((s, c) => s + c.quantity, 0)
     const cartTotal = cart.reduce((s, c) => s + c.price * c.quantity, 0).toFixed(2)
     this.setData({ cart, cartCount, cartTotal })
@@ -251,11 +241,15 @@ Page({
   },
 
   onSelectStar(e) {
-    this.setData({ ratingValue: e.currentTarget.dataset.value })
+    this.setData({ ratingValue: parseInt(e.currentTarget.dataset.value) })
+  },
+
+  onContentInput(e) {
+    this.setData({ ratingContent: e.detail.value })
   },
 
   onSubmitRating() {
-    const { ratingProductId, ratingValue } = this.data
+    const { ratingProductId, ratingValue, ratingContent } = this.data
     const openid = app.globalData.openid
     if (!openid) {
       wx.showToast({ title: '请先登录', icon: 'none' })
@@ -265,10 +259,11 @@ Page({
     api.submitReview({
       user_openid: openid,
       product_id: ratingProductId,
-      rating: ratingValue
+      rating: ratingValue,
+      content: ratingContent
     }).then(res => {
       wx.hideLoading()
-      this.setData({ showRating: false })
+      this.setData({ showRating: false, ratingContent: '' })
       wx.showToast({ title: '评价成功', icon: 'success' })
       // 更新本地商品数据
       const products = this.data.products.map(p => {
