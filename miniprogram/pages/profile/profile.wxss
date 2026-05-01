@@ -1,0 +1,28 @@
+/* pages/profile/profile.wxss */
+.profile-page { padding: 20rpx 24rpx; background: #f5f2ed; min-height: 100vh; }
+
+.profile-header { display: flex; align-items: center; background: #fff; border-radius: 20rpx; padding: 32rpx; box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.04); }
+.profile-avatar { width: 100rpx; height: 100rpx; border-radius: 50%; background: linear-gradient(135deg, #d4739a, #e891b0); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.avatar-text { color: #fff; font-size: 40rpx; font-weight: 600; }
+.profile-info { flex: 1; margin-left: 24rpx; }
+
+.nickname-row { display: flex; align-items: center; justify-content: space-between; }
+.nickname { font-size: 32rpx; color: #333; font-weight: 600; }
+.btn-edit { padding: 8rpx 20rpx; border: 2rpx solid #d4739a; border-radius: 24rpx; }
+.btn-edit-text { font-size: 24rpx; color: #d4739a; }
+
+.edit-row { display: flex; align-items: center; gap: 12rpx; }
+.nickname-input { flex: 1; background: #f8f5f0; border-radius: 12rpx; padding: 12rpx 16rpx; font-size: 28rpx; }
+.btn-save { padding: 10rpx 20rpx; background: linear-gradient(135deg, #d4739a, #e891b0); border-radius: 24rpx; }
+.btn-save-text { color: #fff; font-size: 24rpx; }
+.btn-cancel { padding: 10rpx 20rpx; }
+.btn-cancel-text { color: #999; font-size: 24rpx; }
+
+.profile-section { margin-top: 24rpx; background: #fff; border-radius: 20rpx; overflow: hidden; box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.04); }
+.section-item { display: flex; justify-content: space-between; align-items: center; padding: 28rpx 24rpx; }
+.section-label { font-size: 28rpx; color: #333; }
+.section-arrow { font-size: 28rpx; color: #ccc; }
+
+.profile-footer { margin-top: 40rpx; padding: 20rpx; text-align: center; }
+.openid-label { display: block; font-size: 22rpx; color: #ccc; }
+.openid-value { display: block; font-size: 22rpx; color: #bbb; margin-top: 8rpx; word-break: break-all; }

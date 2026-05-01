@@ -1,0 +1,55 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/orders/orders",
+    "pages/products/products",
+    "pages/shop/shop",
+    "pages/addProduct/addProduct",
+    "pages/editCategory/editCategory",
+    "pages/productList/productList",
+    "pages/myOrders/myOrders",
+    "pages/profile/profile"
+  ],
+  "window": {
+    "backgroundColor": "#f8f5f0",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#f8f5f0",
+    "navigationBarTitleText": "橙树下的哈基猫",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#d4739a",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "images/icons/home.png",
+        "selectedIconPath": "images/icons/home-active.png"
+      },
+      {
+        "pagePath": "pages/orders/orders",
+        "text": "订单",
+        "iconPath": "images/icons/business.png",
+        "selectedIconPath": "images/icons/business-active.png"
+      },
+      {
+        "pagePath": "pages/products/products",
+        "text": "商品",
+        "iconPath": "images/icons/goods.png",
+        "selectedIconPath": "images/icons/goods-active.png"
+      },
+      {
+        "pagePath": "pages/shop/shop",
+        "text": "店铺",
+        "iconPath": "images/icons/usercenter.png",
+        "selectedIconPath": "images/icons/usercenter-active.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents"
+}

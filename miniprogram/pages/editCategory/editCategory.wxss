@@ -1,0 +1,14 @@
+/* pages/editCategory/editCategory.wxss */
+.edit-category-page { padding: 20rpx 0 160rpx; }
+.loading-text { text-align: center; padding: 60rpx; color: #999; font-size: 26rpx; }
+.empty-state { display: flex; flex-direction: column; align-items: center; padding: 120rpx 0; }
+.empty-text { color: #ccc; font-size: 28rpx; }
+.category-list { padding: 0 24rpx; }
+.category-item { display: flex; justify-content: space-between; align-items: center; background: #fff; border-radius: 16rpx; margin-bottom: 16rpx; padding: 24rpx; box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.03); }
+.category-left { display: flex; align-items: center; }
+.drag-handle { width: 36rpx; height: 36rpx; margin-right: 20rpx; opacity: 0.3; }
+.category-name { font-size: 30rpx; color: #333; }
+.category-actions { display: flex; align-items: center; }
+.delete-btn { width: 40rpx; height: 40rpx; padding: 8rpx; opacity: 0.4; }
+.bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; padding: 20rpx 24rpx; padding-bottom: calc(20rpx + env(safe-area-inset-bottom)); background: #fff; box-shadow: 0 -2rpx 12rpx rgba(0,0,0,0.04); }
+.add-btn { width: 100%; text-align: center; }

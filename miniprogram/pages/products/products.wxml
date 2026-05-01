@@ -1,0 +1,23 @@
+<!--pages/products/products.wxml-->
+<view class="products-page">
+  <view wx:if="{{loading}}" class="loading-text">加载中...</view>
+
+  <view wx:elif="{{categories.length === 0}}" class="empty-state">
+    <text class="empty-text">暂无类目</text>
+    <view class="btn-primary add-first-btn" bindtap="onAddCategory">添加第一个类目</view>
+  </view>
+
+  <view wx:else class="category-grid">
+    <view wx:for="{{categories}}" wx:key="id" class="category-card" bindtap="onTapCategory" data-id="{{item.id}}" data-name="{{item.name}}">
+      <view class="category-icon-wrap">
+        <image class="category-icon" src="{{item.icon || '/images/default-goods-image.png'}}" mode="aspectFit"></image>
+      </view>
+      <text class="category-name">{{item.name}}</text>
+    </view>
+  </view>
+
+  <view class="bottom-bar">
+    <view class="btn-outline" bindtap="onEditCategory">编辑类目</view>
+    <view class="btn-primary" bindtap="onAddCategory">新增类目</view>
+  </view>
+</view>

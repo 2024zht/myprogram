@@ -1,0 +1,31 @@
+<!--pages/orders/orders.wxml-->
+<view class="orders-page">
+  <view wx:if="{{loading}}" class="loading-text">加载中...</view>
+
+  <view wx:elif="{{orders.length === 0}}" class="empty-state">
+    <text class="empty-text">暂无订单</text>
+  </view>
+
+  <view wx:for="{{orders}}" wx:key="id" class="order-card" bindtap="onTapOrder" data-id="{{item.id}}">
+    <view class="order-header">
+      <text class="order-id">订单 #{{item.id}}</text>
+      <view class="tag tag-{{item.status}}">{{item.statusText}}</view>
+    </view>
+    <view class="order-items">
+      <view wx:for="{{item.items}}" wx:for-item="product" wx:key="product_id" class="order-item-row">
+        <text class="item-name">{{product.name}}</text>
+        <view class="item-right">
+          <text class="item-price">¥{{product.price}}</text>
+          <text class="item-qty">x{{product.quantity}}</text>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{item.remark}}" class="order-remark">
+      <text class="remark-text">备注：{{item.remark}}</text>
+    </view>
+    <view class="order-footer">
+      <text class="order-time">{{item.created_at}}</text>
+      <text class="order-total">合计: ¥{{item.total_price}}</text>
+    </view>
+  </view>
+</view>

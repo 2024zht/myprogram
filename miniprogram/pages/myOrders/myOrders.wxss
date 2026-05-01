@@ -1,0 +1,33 @@
+/* pages/myOrders/myOrders.wxss */
+.my-orders-page { padding: 20rpx 24rpx 40rpx; background: #f5f2ed; min-height: 100vh; }
+.loading-text { text-align: center; padding: 60rpx; color: #999; font-size: 26rpx; }
+.empty-state { display: flex; justify-content: center; padding: 160rpx 0; }
+.empty-text { color: #ccc; font-size: 28rpx; }
+
+.order-card { background: #fff; border-radius: 16rpx; padding: 24rpx; margin-bottom: 20rpx; box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.04); }
+.order-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16rpx; }
+.order-id { font-size: 28rpx; color: #333; font-weight: 500; }
+.order-status { font-size: 24rpx; padding: 4rpx 16rpx; border-radius: 20rpx; }
+.status-pending { color: #ff9800; background: #fff3e0; }
+.status-accepted { color: #4caf50; background: #e8f5e9; }
+.status-rejected { color: #e54545; background: #ffebee; }
+.status-done { color: #999; background: #f5f5f5; }
+.status-cancelled { color: #999; background: #f5f5f5; }
+
+.order-items { border-top: 1rpx solid #f5f5f5; padding-top: 12rpx; }
+.order-item-row { display: flex; align-items: center; padding: 10rpx 0; }
+.order-item-name { flex: 1; font-size: 26rpx; color: #333; }
+.order-item-qty { font-size: 24rpx; color: #999; margin-right: 20rpx; }
+.order-item-price { font-size: 26rpx; color: #d4739a; font-weight: 500; }
+
+.order-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 16rpx; padding-top: 12rpx; border-top: 1rpx solid #f5f5f5; }
+.order-time { font-size: 22rpx; color: #bbb; }
+.order-total { font-size: 28rpx; color: #d4739a; font-weight: 600; }
+
+.order-remark { margin-top: 16rpx; padding: 16rpx 20rpx; background: #e8f5e9; border-radius: 12rpx; }
+.remark-label { font-size: 24rpx; color: #4caf50; font-weight: 500; }
+.remark-text { font-size: 26rpx; color: #333; margin-left: 8rpx; }
+
+.order-actions { display: flex; justify-content: flex-end; margin-top: 16rpx; }
+.btn-cancel-order { padding: 12rpx 30rpx; border: 1rpx solid #e54545; border-radius: 30rpx; }
+.btn-cancel-order text { font-size: 24rpx; color: #e54545; }

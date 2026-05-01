@@ -1,0 +1,14 @@
+/* pages/products/products.wxss */
+.products-page { padding: 20rpx 0 160rpx; }
+.loading-text { text-align: center; padding: 60rpx; color: #999; font-size: 26rpx; }
+.empty-state { display: flex; flex-direction: column; align-items: center; padding: 120rpx 0; }
+.empty-text { color: #ccc; font-size: 28rpx; margin-bottom: 30rpx; }
+.add-first-btn { width: 300rpx; }
+.category-grid { display: flex; flex-wrap: wrap; padding: 10rpx 12rpx; }
+.category-card { width: 33.33%; display: flex; flex-direction: column; align-items: center; padding: 20rpx 0; }
+.category-icon-wrap { width: 160rpx; height: 160rpx; border-radius: 20rpx; overflow: hidden; background: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.06); }
+.category-icon { width: 120rpx; height: 120rpx; }
+.category-name { margin-top: 12rpx; font-size: 26rpx; color: #333; }
+.bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; display: flex; justify-content: space-around; align-items: center; padding: 20rpx 24rpx; padding-bottom: calc(20rpx + env(safe-area-inset-bottom)); background: #fff; box-shadow: 0 -2rpx 12rpx rgba(0,0,0,0.04); }
+.btn-outline { flex: 1; margin: 0 10rpx; text-align: center; padding: 16rpx 0; border-radius: 40rpx; font-size: 30rpx; color: #d4739a; border: 2rpx solid #d4739a; background: #fff; }
+.btn-primary { flex: 1; margin: 0 10rpx; text-align: center; padding: 16rpx 0; border-radius: 40rpx; font-size: 30rpx; color: #fff; background-color: #d4739a; }

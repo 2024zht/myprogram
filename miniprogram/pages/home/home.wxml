@@ -1,0 +1,151 @@
+<!--pages/home/home.wxml-->
+<scroll-view class="page-scroll" scroll-y scroll-anchoring="{{false}}">
+  <!-- 顶部 banner（随页面滚动自然上移） -->
+  <view class="banner">
+    <image class="banner-img" src="https://twosmallcats.asia/uploads/1777562988083.png" mode="widthFix"></image>
+  </view>
+
+  <!-- 主体区域（sticky吸顶） -->
+  <view class="main-wrap">
+    <view class="main-content">
+      <!-- 左侧分类栏 -->
+      <scroll-view class="sidebar" scroll-y enhanced="{{true}}" show-scrollbar="{{false}}">
+        <view
+          wx:for="{{categories}}"
+          wx:key="id"
+          class="sidebar-item {{activeIndex === index ? 'active' : ''}}"
+          data-index="{{index}}"
+          data-id="{{item.id}}"
+          bindtap="onTapCategory"
+        >
+          <text>{{item.name}}</text>
+        </view>
+        <view wx:if="{{categories.length === 0}}" class="sidebar-empty">暂无分类</view>
+      </scroll-view>
+
+      <!-- 右侧商品列表 -->
+      <scroll-view class="product-area" scroll-y>
+        <view wx:if="{{loading}}" class="loading-text">加载中...</view>
+
+        <view wx:elif="{{products.length === 0}}" class="empty-state">
+          <text class="empty-text">该分类下暂无商品</text>
+        </view>
+
+        <view wx:for="{{products}}" wx:key="id" class="product-card">
+          <image class="product-img" src="{{item.image || 'https://twosmallcats.asia/uploads/1777562988083.png'}}" mode="aspectFill"></image>
+          <view class="product-info">
+            <text class="product-name">{{item.name}}</text>
+            <text class="product-desc">{{item.description}}</text>
+            <view class="product-rating" data-id="{{item.id}}" catchtap="onOpenRating">
+              <block wx:for="{{5}}" wx:for-item="s" wx:key="*this">
+                <text class="star {{item.rating >= s ? 'star-on' : ''}}">★</text>
+              </block>
+              <text class="rating-text">{{item.rating || '5.0'}} ({{item.review_count || 0}}条评价)</text>
+            </view>
+            <view class="product-bottom">
+              <text class="product-price">{{item.price}}元</text>
+              <view class="product-actions">
+                <text wx:if="{{item.stock > 0}}" class="product-stock">库存 {{item.stock}}</text>
+                <text wx:else class="product-out">已售罄</text>
+                <view wx:if="{{item.stock > 0}}" class="btn-add" data-id="{{item.id}}" catchtap="onAddToCart">
+                  <text class="btn-add-text">+</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <!-- 底部留白，防止被购物车栏遮挡 -->
+        <view class="bottom-spacer"></view>
+      </scroll-view>
+    </view>
+  </view>
+</scroll-view>
+
+<!-- 购物车悬浮条 -->
+<view class="cart-bar" wx:if="{{cartCount > 0}}">
+  <view class="cart-bar-left" bindtap="onToggleCart">
+    <view class="cart-icon-wrap">
+      <image class="cart-icon-img" src="/images/icons/cart.png" mode="aspectFit"></image>
+      <view class="cart-badge">{{cartCount}}</view>
+    </view>
+    <text class="cart-bar-text">已选 {{cartCount}} 件 | {{cartTotal}}元</text>
+  </view>
+  <view class="btn-order-bar" bindtap="onPlaceOrder">
+    <text>一键下单</text>
+  </view>
+</view>
+
+<!-- 购物车面板 -->
+<view wx:if="{{showCart}}" class="cart-mask" bindtap="onCloseCart"></view>
+<view wx:if="{{showCart}}" class="cart-panel">
+  <view class="cart-panel-header">
+    <text class="cart-panel-title">已选商品</text>
+    <view class="cart-clear" bindtap="onClearCart">
+      <text class="cart-clear-text">清空</text>
+    </view>
+  </view>
+  <scroll-view class="cart-panel-body" scroll-y>
+    <view wx:for="{{cart}}" wx:key="product_id" class="cart-item">
+      <image class="cart-item-img" src="{{item.image || 'https://twosmallcats.asia/uploads/1777562988083.png'}}" mode="aspectFill"></image>
+      <view class="cart-item-info">
+        <text class="cart-item-name">{{item.name}}</text>
+        <text class="cart-item-price">{{item.price}}元</text>
+      </view>
+      <view class="cart-item-qty">
+        <view class="cart-qty-btn" data-id="{{item.product_id}}" catchtap="onCartMinus">-</view>
+        <text class="cart-qty-num">{{item.quantity}}</text>
+        <view class="cart-qty-btn" data-id="{{item.product_id}}" catchtap="onCartPlus">+</view>
+      </view>
+    </view>
+    <view wx:if="{{cart.length === 0}}" class="cart-empty">
+      <text>购物车是空的</text>
+    </view>
+  </scroll-view>
+  <!-- 备注区域 -->
+  <view class="cart-remark-wrap">
+    <text class="cart-remark-label">备注</text>
+    <input class="cart-remark-input" placeholder="如：少辣、加急、预计送达时间等" value="{{remark}}" bindinput="onRemarkInput" />
+  </view>
+  <view class="cart-panel-footer">
+    <view class="btn-order-panel" bindtap="onPlaceOrder">
+      <text>一键下单（{{cartTotal}}元）</text>
+    </view>
+  </view>
+</view>
+
+<!-- 评价面板 -->
+<view wx:if="{{showRating}}" class="rating-mask" bindtap="onCloseRating"></view>
+<view wx:if="{{showRating}}" class="rating-panel">
+  <view class="rating-panel-header">
+    <text class="rating-panel-title">评价商品</text>
+    <text class="rating-panel-close" bindtap="onCloseRating">×</text>
+  </view>
+  <view class="rating-product-name">{{ratingProductName}}</view>
+  <view class="rating-stars">
+    <block wx:for="{{5}}" wx:key="*this">
+      <text class="rating-star-btn {{ratingValue >= item ? 'star-on' : ''}}" data-value="{{item}}" catchtap="onSelectStar">★</text>
+    </block>
+  </view>
+  <view class="rating-hint">{{ratingValue}} 星</view>
+  <view class="rating-panel-footer">
+    <view class="btn-submit-rating" bindtap="onSubmitRating">
+      <text>提交评价</text>
+    </view>
+  </view>
+</view>
+
+<!-- 用户底部导航 -->
+<view wx:if="{{role === 'user'}}" class="user-tabbar">
+  <view class="user-tab active" data-tab="home" bindtap="onUserTab">
+    <text class="user-tab-icon"> </text>
+    <text class="user-tab-text">首页</text>
+  </view>
+  <view class="user-tab" data-tab="orders" bindtap="onUserTab">
+    <text class="user-tab-icon"> </text>
+    <text class="user-tab-text">我的订单</text>
+  </view>
+  <view class="user-tab" data-tab="profile" bindtap="onUserTab">
+    <text class="user-tab-icon"> </text>
+    <text class="user-tab-text">我的</text>
+  </view>
+</view>

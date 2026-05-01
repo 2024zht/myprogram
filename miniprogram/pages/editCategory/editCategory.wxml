@@ -1,0 +1,25 @@
+<!--pages/editCategory/editCategory.wxml-->
+<view class="edit-category-page">
+  <view wx:if="{{loading}}" class="loading-text">加载中...</view>
+
+  <view wx:elif="{{categories.length === 0}}" class="empty-state">
+    <text class="empty-text">暂无类目</text>
+  </view>
+
+  <view wx:else class="category-list">
+    <view wx:for="{{categories}}" wx:key="id" class="category-item">
+      <view class="category-left">
+        <image class="drag-handle" src="/images/icons/copy.png" mode="aspectFit"></image>
+        <text class="category-name">{{item.name}}</text>
+      </view>
+      <view class="category-actions">
+        <image class="delete-btn" src="/images/icons/close.png" mode="aspectFit" bindtap="onDeleteCategory" data-id="{{item.id}}" data-name="{{item.name}}"></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部新增按钮 -->
+  <view class="bottom-bar">
+    <view class="btn-primary add-btn" bindtap="onAddCategory">新增类目</view>
+  </view>
+</view>

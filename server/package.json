@@ -1,0 +1,16 @@
+{
+  "name": "gf-shop-server",
+  "version": "1.0.0",
+  "description": "橙树下的哈基猫 - 后端服务",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "better-sqlite3": "^9.4.3",
+    "multer": "^1.4.5-lts.1",
+    "cors": "^2.8.5"
+  }
+}

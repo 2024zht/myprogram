@@ -1,0 +1,29 @@
+<!--pages/shop/shop.wxml-->
+<view class="shop-page">
+  <view class="shop-banner">
+    <image class="banner-img" src="{{shopBanner}}" mode="widthFix"></image>
+  </view>
+
+  <view class="shop-info">
+    <view class="avatar-wrap">
+      <image class="shop-avatar" src="{{shopAvatar}}" mode="aspectFit"></image>
+    </view>
+    <text class="shop-name">{{shopName}}</text>
+  </view>
+
+  <view class="shop-actions">
+    <view class="btn-enter" bindtap="onEnterShop">
+      <text class="btn-enter-text">进店逛逛</text>
+    </view>
+    <view class="btn-manage" bindtap="onManageShop">
+      <text class="btn-manage-text">店铺管理</text>
+    </view>
+  </view>
+
+  <view class="boss-bind">
+    <view class="btn-bind {{bossBound ? 'bound' : ''}}" bindtap="onBindBoss">
+      <text class="btn-bind-text">{{bossBound ? '已绑定通知' : '绑定订单通知'}}</text>
+    </view>
+    <text class="bind-hint">老板点击绑定，下单时将收到微信通知</text>
+  </view>
+</view>

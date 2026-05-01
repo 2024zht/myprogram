@@ -1,0 +1,36 @@
+<!--pages/productList/productList.wxml-->
+<view class="product-list-page">
+  <view wx:if="{{loading}}" class="loading-text">加载中...</view>
+
+  <view wx:elif="{{products.length === 0}}" class="empty-state">
+    <text class="empty-text">暂无商品</text>
+  </view>
+
+  <view wx:else class="product-list">
+    <view wx:for="{{products}}" wx:key="id" class="product-card">
+      <image class="product-image" src="{{item.image || '/images/default-goods-image.png'}}" mode="aspectFill"></image>
+      <view class="product-info">
+        <text class="product-name">{{item.name}}</text>
+        <text class="product-desc">{{item.description}}</text>
+        <view class="product-rating-row">
+          <block wx:for="{{5}}" wx:for-item="s" wx:key="*this">
+            <text class="pl-star {{item.rating >= s ? 'pl-star-on' : ''}}">★</text>
+          </block>
+          <text class="pl-rating-text">{{item.rating || '5.0'}} ({{item.review_count || 0}}条)</text>
+        </view>
+        <view class="product-bottom">
+          <text class="product-price">¥{{item.price}}</text>
+          <text class="product-stock">库存: {{item.stock}}</text>
+        </view>
+      </view>
+      <view class="product-actions">
+        <image class="action-icon" src="/images/icons/close.png" mode="aspectFit" bindtap="onDeleteProduct" data-id="{{item.id}}" data-name="{{item.name}}"></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部添加按钮 -->
+  <view class="bottom-bar">
+    <view class="btn-primary add-btn" bindtap="onAddProduct">添加商品</view>
+  </view>
+</view>

@@ -1,0 +1,56 @@
+<!--pages/addProduct/addProduct.wxml-->
+<view class="add-product-page">
+  <view class="form-card">
+    <!-- 商品名称 -->
+    <view class="form-item">
+      <text class="form-label">商品名称</text>
+      <input class="form-input" placeholder="请输入商品名称" value="{{formData.name}}" data-field="name" bindinput="onInputChange" />
+    </view>
+
+    <!-- 商品简介 -->
+    <view class="form-item">
+      <text class="form-label">商品简介</text>
+      <input class="form-input" placeholder="请输入商品简介" value="{{formData.description}}" data-field="description" bindinput="onInputChange" />
+    </view>
+
+    <!-- 所属类目 -->
+    <view class="form-item">
+      <text class="form-label">所属类目</text>
+      <view wx:if="{{formData.categoryName}}" class="form-static">{{formData.categoryName}}</view>
+      <picker wx:else mode="selector" range="{{categories}}" range-key="name" bindchange="onCategoryChange">
+        <view class="form-picker placeholder">请选择所属类目</view>
+      </picker>
+    </view>
+
+    <!-- 价格 -->
+    <view class="form-item">
+      <text class="form-label">价格</text>
+      <input class="form-input" type="digit" placeholder="请输入价格" value="{{formData.price}}" data-field="price" bindinput="onInputChange" />
+    </view>
+
+    <!-- 库存数量 -->
+    <view class="form-item">
+      <text class="form-label">库存数量</text>
+      <input class="form-input" type="number" placeholder="请输入库存数量" value="{{formData.stock}}" data-field="stock" bindinput="onInputChange" />
+    </view>
+
+    <!-- 商品图片 -->
+    <view class="form-item">
+      <text class="form-label">商品图片</text>
+      <view class="image-upload" bindtap="onChooseImage">
+        <view wx:if="{{formData.image}}" class="image-preview-wrap">
+          <image class="image-preview" src="{{formData.image}}" mode="aspectFit"></image>
+        </view>
+        <view wx:else class="upload-placeholder">
+          <image class="upload-icon" src="/images/icons/close.png" mode="aspectFit"></image>
+          <text class="upload-text">{{uploading ? '上传中...' : '点击上传'}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <view class="submit-bar">
+    <view class="btn-primary submit-btn" bindtap="onSubmit">添加商品</view>
+  </view>
+</view>
